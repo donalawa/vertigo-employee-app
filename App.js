@@ -1,12 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 import colors from './app/config/colors';
 import LoginScreen from './app/screens/LoginScreen';
+import HomeScreen from './app/screens/HomeScreen';
 
 export default function App() {
   return (
-        <LoginScreen />
+    <>
+        <HomeScreen />
+        <StatusBar barStyle="light-content" /> 
+    </>
   );
 }
 
