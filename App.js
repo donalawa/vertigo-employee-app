@@ -9,6 +9,7 @@ export default function App() {
   return (
     <>
         <HomeScreen />
+        {/* <LoginScreen /> */}
         <StatusBar barStyle="light-content" /> 
     </>
   );

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 100,
         justifyContent: 'space-between',
-        paddingHorizontal: 10,
+        // paddingHorizontal: 10,
         width: '100%',
     },
     cart: {

@@ -6,6 +6,7 @@ export default {
     medium: '#8B8E90',
     light: '#DFE0DF',
     dark: "#101217",
-    danger: '#DB5050'
+    danger: '#DB5050',
+    cardColors: ['#CFDDDB','#E4CCED','#C9CAEE','#C2DAE9']
 }
 

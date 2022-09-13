@@ -7,6 +7,7 @@ import AppFormField from '../components/forms/AppFormField';
 import AppForm from '../components/forms/AppForm';
 import SubmitButton from '../components/forms/SubmitButton';
 import AppText from '../components/AppText';
+import AppLargeText from '../components/AppLargeText';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import defaultStyles from '../config/styles';
@@ -23,7 +24,7 @@ function LoginScreen(props) {
         <Screen>
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
-                    <AppText style={styles.title}>Vertigo</AppText>
+                    <AppLargeText style={styles.title}>Vertigo</AppLargeText>
                     <View style={styles.formContainer}>
                         <AppForm 
                         initialValues={{email: '', password: ''}}
