@@ -1,26 +1,57 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import * as Yup from 'yup';
 
+
+import AppFormField from '../components/forms/AppFormField';
+import AppForm from '../components/forms/AppForm';
+import SubmitButton from '../components/forms/SubmitButton';
 import AppText from '../components/AppText';
 import AppTextInput from '../components/AppTextInput';
+import AppButton from '../components/AppButton';
 import defaultStyles from '../config/styles';
 import Screen from '../components/Screen';
 
+const validationSchema = Yup.object().shape({
+    email: Yup.string().required().email().label('email'),
+    password: Yup.string().required().min(4).label('Password')
+})
+
 function LoginScreen(props) {
+
     return (
         <Screen>
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <AppText style={styles.title}>Vertigo</AppText>
                     <View style={styles.formContainer}>
-                        <AppTextInput 
-                        icon="email-outline"
-                        placeholder="Enter email"
-                        />
-                         <AppTextInput 
-                        icon="lock-outline"
-                        placeholder="Enter Password"
-                        />
+                        <AppForm 
+                        initialValues={{email: '', password: ''}}
+                        onSubmit={(values) => console.log('Form Submited', values)}
+                        validationSchema={validationSchema}
+                        >
+                            <AppFormField 
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="email-outline"
+                            name="email"
+                            keyBoardType="email-address"
+                            placeholder="Enter email"
+                            textContentType="emailAddress"
+                            />
+                            <AppFormField 
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock-outline"
+                            name="password"
+                            placeholder="Enter Password"
+                            secureTextEntry
+                            textContentType="password"
+                            />
+                            <View style={styles.loginBtnContainer}>
+                                <SubmitButton title="Login" />
+                            </View>
+                        </AppForm>
                     </View>
                 </View>
             </View>
@@ -49,6 +80,9 @@ const styles = StyleSheet.create({
     formContainer: {
         width: '90%',
         marginTop: 20
+    },
+    loginBtnContainer: {
+        marginTop: 22
     }
 })
 
