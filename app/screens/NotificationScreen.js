@@ -12,6 +12,7 @@ function NotificationScreen({props}) {
     }
 
     const handleCancel = () => {
+        
         console.log('worker is not free');
     }
     return (
