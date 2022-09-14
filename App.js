@@ -9,6 +9,7 @@ import LoginScreen from './app/screens/LoginScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import navigationTheme from './app/navigation/navigationTheme';
 
+
 export default function App() {
   return (
     <>

@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+
 import AppText from '../components/AppText';
+import AppLargeText from '../components/AppLargeText';
 import defaultStyles from '../config/styles';
 import MenuCart from '../components/MenuCart';
 import MenuCard from '../components/MenuCard';
+import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 
-function HomeScreen(props) {
+function HomeScreen({ navigation }) {
     const [selectedItem, setSelectedItem] = useState();
-    
+
     return (
         <Screen>
             <View style={styles.container}>
-                <MenuCart />
+                <View style={styles.cartContainer}>
+                    <AppLargeText style={styles.title}>MENU</AppLargeText>
+                   <TouchableOpacity onPress={() => navigation.navigate({name: routes.CART_SCREEN})}>
+                        <MenuCart />
+                   </TouchableOpacity>
+                </View>
                 <View style={styles.select} >
                 <Picker
-                
                     style={{color: '#fff'}}
                     selectedValue={selectedItem}
                     onValueChange={(itemValue, itemIndex) =>
@@ -30,7 +37,7 @@ function HomeScreen(props) {
                   <MaterialCommunityIcons size={24} color={defaultStyles.colors.light} style={styles.icon} name="arrow-down-circle-outline" />
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <MenuCard title="Breakfast" text="13" icon="tea" color={defaultStyles.colors.cardColors[0]}/>
+                    <MenuCard onPress={() => navigation.navigate('Products')} title="Breakfast" text="13" icon="tea" color={defaultStyles.colors.cardColors[0]}/>
                     <MenuCard title="Wine" text="22" icon="glass-wine" color={defaultStyles.colors.cardColors[1]}/>
                 </View>
             </View>
@@ -44,11 +51,25 @@ const styles = StyleSheet.create({
         backgroundColor: defaultStyles.colors.dark,
         paddingHorizontal: 10,
     },
+    cartContainer: {
+        // width: '100%',
+        alignItems: 'center',
+        // backgroundColor: 'royalblue',
+        flexDirection: 'row',
+        height: 100,
+        justifyContent: 'space-between',
+        // paddingHorizontal: 10,
+        width: '100%',
+    },
     select: {
         position: 'relative',
         // flexDirection: 'row',
         backgroundColor: defaultStyles.colors.secondary
     }, 
+    title: {
+        color: defaultStyles.colors.primary,
+        fontSize: 70
+    },
     icon: {
         position: 'absolute',
         right: 10,

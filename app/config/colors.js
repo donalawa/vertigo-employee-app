@@ -4,6 +4,7 @@ export default {
     black: '#000',
     white: '#fff',
     medium: '#8B8E90',
+    card: "#F9C1D9",
     light: '#DFE0DF',
     dark: "#101217",
     danger: '#DB5050',

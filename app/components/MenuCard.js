@@ -1,22 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AppText from './AppText';
 import colors from '../config/colors';
-function MenuCard({color, title, text, icon}) {
+function MenuCard({color, title, text, icon, onPress}) {
     return (
-        <View style={[styles.container, {backgroundColor: color}]}>
+        <TouchableOpacity onPress={onPress} style={[styles.container, {backgroundColor: color}]}>
             <MaterialCommunityIcons name={icon} size={25}/>
             <AppText style={styles.title}>{title}</AppText>
             <AppText style={styles.text}>{text} items</AppText>
-        </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'royalblue',
+        // backgroundColor: 'royalblue',
         borderRadius: 10,
         height: 153,
         width: 186,
