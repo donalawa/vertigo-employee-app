@@ -34,6 +34,7 @@ function CheckoutScreen(props) {
                     </View>
                     <View style={styles.paymentContainer}>
                         <AppText>Payment Method</AppText>
+                        
                         <View>
                             {/* PAYMENT METHOD CARDS */}
                         </View>
