@@ -4,6 +4,9 @@ import { View, StyleSheet } from 'react-native';
 import AppText from '../components/AppText';
 import AppLargeText from '../components/AppLargeText';
 import AppPageHeader from '../components/AppPageHeader';
+import AppRadioButton from '../components/AppRadioButton';
+import AppButton from '../components/AppButton';
+import PaymentMethodCard from '../components/PaymentMethodCard';
 import Screen from '../components/Screen';
 import colors from '../config/colors';
 
@@ -34,10 +37,23 @@ function CheckoutScreen(props) {
                     </View>
                     <View style={styles.paymentContainer}>
                         <AppText>Payment Method</AppText>
-                        
-                        <View>
+
+                        <View style={styles.paymentMethods}>
                             {/* PAYMENT METHOD CARDS */}
+                            <PaymentMethodCard name="Cash" isActive={true} icon="currency-usd"/>
+                            <PaymentMethodCard name="Debit Card" icon="credit-card"/>
+                            <PaymentMethodCard name="Member Card" icon="credit-card"/>
                         </View>
+                    </View>
+                    <View style={styles.paymentTypeContainer}>
+                        <AppText>Payment Type</AppText>
+                        <View style={styles.typeOptions}>
+                            <AppRadioButton />
+                            <AppRadioButton isActive={true}/>
+                        </View>
+                    <View style={styles.placeOrderButton}>
+                        <AppButton title="Place Order"/>
+                    </View>
                     </View>
                 </View>
             </View>
@@ -80,14 +96,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10
     },
+    placeOrderButton: {
+        marginTop: 40
+    }, 
     paymentContainer: {
         marginTop: 20
+    },
+    paymentMethods: {
+        flexDirection: 'row'
+    },
+    paymentTypeContainer: {
+        // PAYMENT TYPE CONTAINER
+        // flexDirection: 'row'
+        paddingBottom: 10
     },
     seperator: {
         borderWidth: 1,
         borderStyle: 'dashed',
         borderColor: colors.medium,
         marginVertical: 10
+    },
+    typeOptions: {
+        flexDirection: 'row'
     },
     tableNum: {
         color: colors.primary,
