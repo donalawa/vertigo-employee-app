@@ -6,9 +6,10 @@ import Screen from '../components/Screen';
 import colors from '../config/colors';
 
 import NotificationCard from '../components/NotificationCard';
-function NotificationScreen({props}) {
+function NotificationScreen({ navigation }) {
     const handleAccepted = () => {
-        console.log('worker is free')
+        // console.log('Handle Accepted')
+        navigation.navigate('NotificationDetails',{job: 'to be done'})
     }
 
     const handleCancel = () => {

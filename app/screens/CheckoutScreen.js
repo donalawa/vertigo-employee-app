@@ -10,12 +10,12 @@ import PaymentMethodCard from '../components/PaymentMethodCard';
 import Screen from '../components/Screen';
 import colors from '../config/colors';
 
-function CheckoutScreen(props) {
+function CheckoutScreen({ navigation }) {
     return (
         <Screen>
             <View style={styles.container}>
                 <View style={styles.headerSecContainer}>
-                    <AppPageHeader />
+                    <AppPageHeader onPress={() => navigation.navigate('Cart')}/>
                     <View style={styles.titleContainer}>
                         <AppLargeText style={styles.tableNum}>Table 5</AppLargeText>
                         <AppLargeText style={styles.title}>Order Summary</AppLargeText>
