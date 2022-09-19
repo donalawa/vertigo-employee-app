@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
 
 import AppFormField from '../components/forms/AppFormField';
 import AppForm from '../components/forms/AppForm';
+import AuthContext from '../auth/context';
 import SubmitButton from '../components/forms/SubmitButton';
 import AppText from '../components/AppText';
 import AppLargeText from '../components/AppLargeText';
@@ -14,11 +15,12 @@ import defaultStyles from '../config/styles';
 import Screen from '../components/Screen';
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().required().email().label('email'),
+    email: Yup.string().required().email().label('Email'),
     password: Yup.string().required().min(4).label('Password')
 })
 
 function LoginScreen(props) {
+    const authContext = useContext(AuthContext);
 
     return (
         <Screen>
@@ -28,7 +30,7 @@ function LoginScreen(props) {
                     <View style={styles.formContainer}>
                         <AppForm 
                         initialValues={{email: '', password: ''}}
-                        onSubmit={(values) => console.log('Form Submited', values)}
+                        onSubmit={(values) => authContext.setUser(values)}
                         validationSchema={validationSchema}
                         >
                             <AppFormField 
