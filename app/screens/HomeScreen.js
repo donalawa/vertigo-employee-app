@@ -11,6 +11,7 @@ import MenuCart from '../components/MenuCart';
 import MenuCard from '../components/MenuCard';
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
+import colors from '../config/colors';
 
 function HomeScreen({ navigation }) {
     const [selectedItem, setSelectedItem] = useState();
@@ -25,8 +26,8 @@ function HomeScreen({ navigation }) {
                    </TouchableOpacity>
                 </View>
                 <View style={styles.select} >
-                <Picker
-                    style={{color: '#fff'}}
+                {/* <Picker
+                    style={{color: '#fff', height:50}}
                     selectedValue={selectedItem}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedItem(itemValue)
@@ -34,7 +35,19 @@ function HomeScreen({ navigation }) {
                     <Picker.Item  label="Foods" value="foods" />
                     <Picker.Item  label="Drinks" value="drinks" />
                   </Picker>
-                  <MaterialCommunityIcons size={24} color={defaultStyles.colors.light} style={styles.icon} name="arrow-down-circle-outline" />
+                  <MaterialCommunityIcons size={24} color={defaultStyles.colors.light} style={styles.icon} name="arrow-down-circle-outline" /> */}
+                  <View style={styles.selectItem}>
+                    <View style={styles.radio}></View>
+                    <AppText style={styles.selectText}>Foods</AppText>
+                  </View>
+                  <View style={styles.selectItem}>
+                    <View style={styles.radio}></View>
+                    <AppText style={styles.selectText}>Today</AppText>
+                  </View>
+                  <View style={styles.selectItem}>
+                    <View style={[styles.radio, styles.active]}></View>
+                    <AppText style={styles.selectText}>Drinks</AppText>
+                  </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                     <MenuCard onPress={() => navigation.navigate('Products')} title="Breakfast" text="13" icon="tea" color={defaultStyles.colors.cardColors[0]}/>
@@ -46,6 +59,9 @@ function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    active: {
+        backgroundColor: colors.primary
+    },
     container: {
         flex: 1,
         backgroundColor: defaultStyles.colors.dark,
@@ -61,11 +77,31 @@ const styles = StyleSheet.create({
         // paddingHorizontal: 10,
         width: '100%',
     },
+    radio: {
+        width: 20,
+        height: 20,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 10,
+        marginRight: 5
+    },
     select: {
         position: 'relative',
         // flexDirection: 'row',
-        backgroundColor: defaultStyles.colors.secondary
+        backgroundColor: defaultStyles.colors.secondary,
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        justifyContent: 'space-around',
+        borderRadius: 4
     }, 
+    selectText:  {
+        fontSize: 18
+    },
+    selectItem: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     title: {
         color: defaultStyles.colors.primary,
         fontSize: 70

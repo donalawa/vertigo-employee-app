@@ -13,8 +13,9 @@ import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import defaultStyles from '../config/styles';
 import Screen from '../components/Screen';
-import auth from '../../api/auth';
-import useAuth from '../../hooks/useAuth';
+import auth from '../api/auth';
+import useAuth from '../hooks/useAuth';
+import colors from '../config/colors';
 
 
 const validationSchema = Yup.object().shape({
@@ -22,43 +23,53 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(4).label('Password')
 })
 
-const onSubmitHandler = ({email, password}) => {
-    try {
-        setIsLoading(true);
-        auth.login({email, password}).then(userCredential => {
-             // store token
-             userCredential.user.getIdToken().then(token => {
-                logIn(token, userCredential.user);
-            })
-            setIsLoading(false);
-        }).catch(error => {
-            // console.log("ERROR", error)
-            setIsLoading(false);
-            if (error.code === "auth/user-not-found") {
-            setError("User is not found.");
-            } else if (error.code === "auth/wrong-password") {
-            setError("Invalid email or password.");
-            } else {
-            setError("Error logging you in. Please try again");
-            }
-        })
-    } catch (error) {
-        console.log("ERROR")
-    }
-}  
 
 function LoginScreen(props) {
     const authContext = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
+    const {logIn} = useAuth();
 
+    const onSubmitHandler = ({email, password}) => {
+        try {
+            setIsLoading(true);
+            auth.login({email, password}).then(userCredential => {
+                 // store token
+                 userCredential.user.getIdToken().then(token => {
+                    logIn(token, userCredential.user);
+                })
+                setIsLoading(false);
+            }).catch(error => {
+                // console.log("ERROR", error)
+                setIsLoading(false);
+                if (error.code === "auth/user-not-found") {
+                setError("User not found.");
+                } else if (error.code === "auth/wrong-password") {
+                setError("Invalid email or password.");
+                } else {
+                setError("Error logging you in. Please try again");
+                }
+            })
+        } catch (error) {
+            console.log("ERROR")
+        }
+    }  
+    
     return (
         <Screen>
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <AppLargeText style={styles.title}>Vertigo</AppLargeText>
+                    {!error ? <AppText style={styles.text}>
+                        Please Enter Your Credentials
+                    </AppText>   :
+                    <AppText style={styles.errorText}>
+                        {error}
+                    </AppText>}
                     <View style={styles.formContainer}>
                         <AppForm 
                         initialValues={{email: '', password: ''}}
-                        onSubmit={(values) => authContext.setUser(values)}
+                        onSubmit={(values) => onSubmitHandler(values)}
                         validationSchema={validationSchema}
                         >
                             <AppFormField 
@@ -102,6 +113,9 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center'
 
+    },
+    errorText: {
+        color: colors.danger
     },
     title: {
         color: defaultStyles.colors.primary,
