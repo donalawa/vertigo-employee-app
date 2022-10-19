@@ -7,7 +7,7 @@ import AppText from './AppText';
 function AppRadioButton({ icon, isActive, onPress }) {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-            <View style={[styles.radio, {backgroundColor: isActive ? colors.medium : 'transparent'}]}>
+            <View style={[styles.radio, {backgroundColor: isActive ? colors.primary : 'transparent'}]}>
                 
             </View>
             <AppText style={styles.text}>Complete</AppText>
