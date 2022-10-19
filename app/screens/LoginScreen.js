@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
@@ -13,6 +13,9 @@ import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import defaultStyles from '../config/styles';
 import Screen from '../components/Screen';
+import auth from '../../api/auth';
+import useAuth from '../../hooks/useAuth';
+
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label('Email'),
