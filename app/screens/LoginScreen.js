@@ -38,6 +38,7 @@ function LoginScreen(props) {
                  userCredential.user.getIdToken().then(token => {
                     logIn(token, userCredential.user);
                 })
+                
                 setIsLoading(false);
             }).catch(error => {
                 // console.log("ERROR", error)
