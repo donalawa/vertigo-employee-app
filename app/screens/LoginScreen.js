@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
-
 import AppFormField from '../components/forms/AppFormField';
 import AppForm from '../components/forms/AppForm';
 import AuthContext from '../auth/context';
@@ -38,7 +37,7 @@ function LoginScreen(props) {
                  userCredential.user.getIdToken().then(token => {
                     logIn(token, userCredential.user);
                 })
-                
+
                 setIsLoading(false);
             }).catch(error => {
                 // console.log("ERROR", error)
