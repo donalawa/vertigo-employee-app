@@ -1,6 +1,7 @@
 import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
 import AuthContext from './app/auth/context';
 import AppNavigator from './app/navigation/AppNavigator';
@@ -13,6 +14,7 @@ import { useContext, useState, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { onAuthStateChanged } from 'firebase/auth';
 import { authentication } from './app/services/firebase';
+import  { store } from './app/state/store'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -53,7 +55,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser}}>
     <NavigationContainer theme={navigationTheme}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
+        {user ? <Provider store={store}><AppNavigator /></Provider> : <AuthNavigator />}
     </NavigationContainer>
         <StatusBar barStyle="light-content" /> 
     </AuthContext.Provider>

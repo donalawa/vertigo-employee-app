@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 
 import AppText from './AppText';
 import AppButton from './AppButton';
@@ -8,14 +8,16 @@ import colors from '../config/colors';
 function NotificationDetailsCard({ onCompleted }) {
     return (
         <View style={styles.container}>
-            <View>
-                <AppText style={styles.title}>TABLE #6</AppText>
-                <AppText style={styles.info}>Services Needed</AppText>
-            </View>
-            <View style={{ width: '100%', alignItems: 'center'}}>
-               <View style={{ width: '30%', height: '100%',justifyContent: 'center'}}>
-                <AppButton onPress={onCompleted} title="Completed"/>
-               </View>
+            <View style={styles.contentContainer}>
+                <View>
+                    <AppText style={styles.title}>TABLE #6</AppText>
+                    <AppText style={styles.info}>Services Needed Services </AppText>
+                </View>
+                <View style={{ width: '100%', alignItems: 'center', marginTop: 20}}>
+                <View style={{ width: '40%',justifyContent: 'center'}}>
+                    <AppButton onPress={onCompleted} title="Completed"/>
+                </View>
+                </View>
             </View>
         </View>
     );
@@ -23,24 +25,31 @@ function NotificationDetailsCard({ onCompleted }) {
 
 const styles = StyleSheet.create({
     container: {
+        justifyContent: 'center',
+        height: '85%',
+    },
+    contentContainer: {
         width: '100%',
-        height: 86,
+        // height: 86,
         backgroundColor: colors.secondary,
         borderRadius: 7,
         padding: 10,
         alignItems: 'center',
-        flexDirection: 'row'
+        // flexDirection: 'row',
+        // height: content,
     },
 
     title: {
         fontSize: 18,
         color: colors.primary,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
 
     info: {
         fontSize: 16,
-        marginTop: 8
+        marginTop: 8,
+        textAlign: 'center'
     }
 })
 

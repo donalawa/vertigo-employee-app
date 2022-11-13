@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-
+import { actionCreators } from '../state';
+import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
 import AppLargeText from '../components/AppLargeText';
 import defaultStyles from '../config/styles';
@@ -12,46 +15,59 @@ import MenuCard from '../components/MenuCard';
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 import colors from '../config/colors';
+import FoodsDisplay from '../components/displays/FoodsDisplay';
+import TodayDisplay from '../components/displays/TodayDisplay';
 
 function HomeScreen({ navigation }) {
+    const dispatch = useDispatch();
+    const state = useSelector(state  => state);
     const [selectedItem, setSelectedItem] = useState();
+    const [activeTab, setActiveTab] = useState('Food');
+
+    let { setTodayFoods } = bindActionCreators(actionCreators, dispatch);
+
+    const handleActiveTab = (tabName) => {
+        setActiveTab(tabName)
+    }
+
+    const getTodayFoods = async() => {
+        
+    }
+
+    useEffect(() => {
+        console.log("HOME SCREEN USE EFFECT RAN");
+    },[])
 
     return (
         <Screen>
             <View style={styles.container}>
                 <View style={styles.cartContainer}>
-                    <AppLargeText style={styles.title}>MENU</AppLargeText>
+                    <View  style={styles.moreButton}>
+                        <MaterialIcons size={23} color={colors.white} name="info"/>
+                        <AppText style={styles.moreText}>More</AppText>                    
+                    </View>
                    <TouchableOpacity onPress={() => navigation.navigate({name: routes.CART_SCREEN})}>
                         <MenuCart />
                    </TouchableOpacity>
                 </View>
                 <View style={styles.select} >
-                {/* <Picker
-                    style={{color: '#fff', height:50}}
-                    selectedValue={selectedItem}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedItem(itemValue)
-                    }>
-                    <Picker.Item  label="Foods" value="foods" />
-                    <Picker.Item  label="Drinks" value="drinks" />
-                  </Picker>
-                  <MaterialCommunityIcons size={24} color={defaultStyles.colors.light} style={styles.icon} name="arrow-down-circle-outline" /> */}
-                  <View style={styles.selectItem}>
-                    <View style={styles.radio}></View>
+                  <TouchableOpacity onPress={() => handleActiveTab('Food')} style={styles.selectItem}>
+                    <View style={[styles.radio, activeTab == 'Food' && styles.active]}></View>
                     <AppText style={styles.selectText}>Foods</AppText>
-                  </View>
-                  <View style={styles.selectItem}>
-                    <View style={styles.radio}></View>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => handleActiveTab('Today')} style={styles.selectItem}>
+                    <View style={[styles.radio, activeTab == 'Today' && styles.active]}></View>
                     <AppText style={styles.selectText}>Today</AppText>
-                  </View>
-                  <View style={styles.selectItem}>
-                    <View style={[styles.radio, styles.active]}></View>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => handleActiveTab('Drink')} style={styles.selectItem}>
+                    <View style={[styles.radio, activeTab == 'Drink' && styles.active]}></View>
                     <AppText style={styles.selectText}>Drinks</AppText>
-                  </View>
+                  </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <MenuCard onPress={() => navigation.navigate('Products')} title="Breakfast" text="13" icon="tea" color={defaultStyles.colors.cardColors[0]}/>
-                    <MenuCard title="Wine" text="22" icon="glass-wine" color={defaultStyles.colors.cardColors[1]}/>
+                <View>
+                    {activeTab == 'Food' && <FoodsDisplay />}
+                    {activeTab == 'Today' && <TodayDisplay />}
+                    {activeTab == 'Food' && <FoodsDisplay />}
                 </View>
             </View>
         </Screen>
@@ -110,6 +126,20 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 14
+    },
+
+    moreButton: {
+        flexDirection: 'row',
+        backgroundColor: colors.secondary,
+        paddingHorizontal: 10,
+        paddingVertical: 12,
+        borderRadius: 10
+    },
+
+    moreText: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginLeft: 5
     }
 })
 

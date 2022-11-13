@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import AppText from './AppText';
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'royalblue',
         borderRadius: 10,
         height: 153,
-        width: 186,
+        width: Dimensions.get('screen').width /  2 - 20,
         marginVertical: 20,
         paddingTop: 22,
         paddingLeft: 10

@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AppText from './AppText';
 import colors from '../config/colors';
 
 function ProductCard(props) {
+
     return (
         <View style={styles.container}>
             <View>
@@ -19,13 +20,19 @@ function ProductCard(props) {
                     <AppText style={styles.price}>5,000 cfa</AppText>
                 </View>
             </View>
-            <View style={styles.buttonsContainer}>
-                <View style={styles.button}>
-                    <MaterialCommunityIcons name="minus" color={colors.light} size={20}/>
+            <View style={styles.bottomContainer}>
+                <View>
+                    <AppText>Takeaway ?</AppText>
+                    <View style={styles.checkBox}></View>
                 </View>
-                <AppText style={styles.quantity}>0</AppText>
-                <View style={styles.button}>
-                    <MaterialCommunityIcons color={colors.light} name="plus" size={20}/>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={styles.button}>
+                        <MaterialCommunityIcons name="plus" color={colors.light} size={20}/>
+                    </TouchableOpacity>
+                    <AppText style={styles.quantity}>0</AppText>
+                    <TouchableOpacity style={styles.button}>
+                        <MaterialCommunityIcons color={colors.light} name="minus" size={20}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -43,24 +50,40 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonsContainer:{
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginRight: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        position: 'absolute',
+        right: 0,
+        bottom: 0
+    },
+    bottomContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     container: {
         backgroundColor: colors.secondary,
-        width: 186,
+        width: Dimensions.get('screen').width / 2 - 30,
         height: 153,
         borderLeftWidth: 4,
         borderLeftColor: colors.card,
         borderRadius: 10,
         padding: 5,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: 20
+    },
+    checkBox: {
+        borderWidth: 2,
+        borderColor: colors.primary,
+        width: 20,
+        height: 20,
+        borderRadius: 5,
+        marginLeft: 2
     },
     quantity: {
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        marginVertical: 10,
     },
     title: {
         fontSize: 32

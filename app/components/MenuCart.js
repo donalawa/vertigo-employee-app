@@ -10,7 +10,7 @@ import defaultStyles from '../config/styles';
 function MenuCart(props) {
     return (
         <View style={styles.cart}>
-                <MaterialCommunityIcons size={28} color={defaultStyles.colors.light} name="cart-outline" />
+                <MaterialCommunityIcons size={22} color={defaultStyles.colors.light} name="cart-outline" />
                 <AppText style={styles.cartItem}>3 Items</AppText>
         </View>
     );
@@ -20,16 +20,17 @@ const styles = StyleSheet.create({
     cart: {
         alignItems: 'center',
         backgroundColor: defaultStyles.colors.primary,
-        borderRadius: 32,
+        borderRadius: 12,
         flexDirection: 'row',
-        height: 52,
+        paddingVertical: 6,
         justifyContent: 'center',
         width: 141,
-
     },
     cartItem: {
         color: defaultStyles.colors.light,
-        fontSize: 22
+        fontSize: 20,
+        marginLeft: 3,
+        marginTop: 4
     }, 
 
 })

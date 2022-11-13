@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 import AppTextInput from '../components/AppTextInput';
@@ -8,8 +8,14 @@ import ProductCard from '../components/ProductCard';
 import Screen from '../components/Screen';
 
 
-function ProductsScreen({ navigation }) {
-    
+function ProductsScreen({ route, navigation }) {
+    const  { day } = route.params;
+
+    useEffect(() => {
+        console.log("RAN")
+        console.log(day)
+    },[])
+
     return (
         <Screen>
             <View style={styles.container}>
@@ -24,6 +30,8 @@ function ProductsScreen({ navigation }) {
                 </View>
                 <View style={styles.productsContainer}>
                     <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
                 </View>
             </View>
         </Screen>
@@ -35,7 +43,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     productsContainer: {
-        marginTop: 15
+        marginTop: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap'
     }
 })
 export default ProductsScreen;
