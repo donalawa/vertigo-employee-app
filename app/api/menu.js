@@ -6,3 +6,4 @@ const getMenuFoods = (day) => client.get(`/menu/${day}`);
 export {
     getMenuFoods
 }
+
