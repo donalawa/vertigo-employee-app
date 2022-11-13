@@ -1,37 +1,47 @@
-import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AppText from './AppText';
 import colors from '../config/colors';
+import AppButton from './AppButton';
 
-function ProductCard(props) {
+function ProductCard({  item  }) {
+    const [isTakeAway, setIsTakeAway] = useState(false);
+    let [activeQuantity, setActiveQuantity] = useState(1);
+    const navigation = useNavigation();
+
+    const handleAddQuantity = async () => {
+        let  updatedItems =  await addQuantity(activeProduct.id);
+        addItemsToCart(updatedItems);
+    }
+
+    const reduceAddQuantity = async () => {
+        let updatedItems = await removeQuantity(activeProduct.id);
+        addItemsToCart(updatedItems);
+    }
+
+    const handleAddToCart = async () => {
+        let item = {item: activeProduct, quantity: 1, amount: activeProduct.price};
+        let allItems = await addItemToStorage(item);
+        addItemsToCart(allItems);
+    }
+
 
     return (
         <View style={styles.container}>
-            <View>
-                <View style={styles.orderDetailsContainer}>
-                    <AppText style={styles.orderDetails}> Orders </AppText>
-                    <MaterialCommunityIcons name="arrow-right" color={colors.medium} size={20}/>
-                    <AppText style={styles.orderDetails}> Kitchen </AppText>
-                </View>
-                <View>
-                    <AppText style={styles.title}>Malta</AppText>
-                    <AppText style={styles.price}>5,000 cfa</AppText>
-                </View>
+            <View style={styles.cardTop}>
+                <Image resizeMode="contain" style={styles.image} source={require('../../assets/adaptive-icon.png')}/>
             </View>
-            <View style={styles.bottomContainer}>
+            <View style={styles.cardBottom}>
                 <View>
-                    <AppText>Takeaway ?</AppText>
-                    <View style={styles.checkBox}></View>
+                    <AppText style={styles.name}>Burger</AppText>
+                    <AppText style={styles.price}>12,000 cfa</AppText>
                 </View>
-                <View style={styles.buttonsContainer}>
-                    <TouchableOpacity style={styles.button}>
-                        <MaterialCommunityIcons name="plus" color={colors.light} size={20}/>
-                    </TouchableOpacity>
-                    <AppText style={styles.quantity}>0</AppText>
-                    <TouchableOpacity style={styles.button}>
-                        <MaterialCommunityIcons color={colors.light} name="minus" size={20}/>
+                <View>
+                    <TouchableOpacity onPress={() =>  navigation.navigate('ProductDetails')} style={styles.viewContainer}>
+                        <MaterialCommunityIcons name="eye" size={22} color={colors.primary} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -39,65 +49,45 @@ function ProductCard(props) {
     );
 }
 
+
 const styles = StyleSheet.create({
-    button: {
-        width: 29,
-        height: 24,
-        borderWidth: 1,
-        borderColor: colors.medium,
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    buttonsContainer:{
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        marginRight: 10,
-        marginBottom: 10,
-        position: 'absolute',
-        right: 0,
-        bottom: 0
-    },
-    bottomContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
     container: {
         backgroundColor: colors.secondary,
-        width: Dimensions.get('screen').width / 2 - 30,
-        height: 153,
+        width: Dimensions.get('screen').width / 2 - 25,
         borderLeftWidth: 4,
         borderLeftColor: colors.card,
         borderRadius: 10,
         padding: 5,
         justifyContent: 'space-between',
-        marginBottom: 20
+        marginBottom: 15
     },
-    checkBox: {
-        borderWidth: 2,
-        borderColor: colors.primary,
-        width: 20,
-        height: 20,
-        borderRadius: 5,
-        marginLeft: 2
+
+    cardTop: {
+        width: '100%',
+        height: 110,
     },
-    quantity: {
-        marginHorizontal: 10,
-        marginVertical: 10,
+
+    cardBottom: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between'
     },
-    title: {
-        fontSize: 32
+
+    image: {
+        width: '100%',
+        height: '100%'
     },
+
     price: {
-        color: colors.medium,
-        fontSize: 14
-    }, 
-    orderDetails: {
-        color: colors.medium,
-        fontSize: 14
+        fontSize: 13
     },
-    orderDetailsContainer: {
-        flexDirection: 'row'
+
+    viewContainer: {
+        borderWidth: 1,
+        borderRadius: 3,
+        padding: 2,
+        borderColor: colors.primary
     }
+    
 })
 export default ProductCard;

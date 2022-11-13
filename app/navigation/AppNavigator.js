@@ -6,9 +6,9 @@ import BottomNavigator from "./BottomNavigator";
 import CartScreen from "../screens/CartScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
 import NotificationDetails from "../screens/NotificationDetails";
+import ProductDetails from "../screens/ProductDetailsScreen";
 
 const Stack = createNativeStackNavigator();
-
 
 const AppNavigator = () => (
     <Stack.Navigator screenOptions={{ headerShown: false}}>
@@ -16,6 +16,7 @@ const AppNavigator = () => (
         <Stack.Screen name="Cart" component={CartScreen} />
         <Stack.Screen name="Checkout" component={CheckoutScreen}/>
         <Stack.Screen name="NotificationDetails" component={NotificationDetails}/>
+        <Stack.Screen name="ProductDetails" component={ProductDetails}/>
     </Stack.Navigator>
 )
 

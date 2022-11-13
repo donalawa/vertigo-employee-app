@@ -17,6 +17,7 @@ import Screen from '../components/Screen';
 import colors from '../config/colors';
 import FoodsDisplay from '../components/displays/FoodsDisplay';
 import TodayDisplay from '../components/displays/TodayDisplay';
+import { getMenuFoods } from '../api/menu';
 
 function HomeScreen({ navigation }) {
     const dispatch = useDispatch();
@@ -31,11 +32,15 @@ function HomeScreen({ navigation }) {
     }
 
     const getTodayFoods = async() => {
-        
+        let res = await getMenuFoods("monday");
+        setTodayFoods(res.data.doc.menu);
+        // console.log(res.data.doc.menu);
+        console.log('DONE')
     }
 
     useEffect(() => {
         console.log("HOME SCREEN USE EFFECT RAN");
+        getTodayFoods();
     },[])
 
     return (

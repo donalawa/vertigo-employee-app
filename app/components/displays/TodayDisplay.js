@@ -14,11 +14,8 @@ function TodayDisplay(props) {
     let renderNum =  1;
 
     useEffect(() => {
-        renderNum += 1;
-        console.log("GET TODAY MEALS")
-        console.log(renderNum)
         setTodayFoods(state?.product?.todayFoods)
-    },[])
+    },[state])
 
     return (
         <View style={styles.container}>
@@ -31,9 +28,10 @@ function TodayDisplay(props) {
                 />
             </View>
             <View style={styles.productsContainer}>
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+
+                {todayFoods?.map(food => <ProductCard item={food} key={food.id}/>)}
+                {/* <ProductCard />
+                <ProductCard /> */}
             </View>
         </View>
     );
