@@ -9,6 +9,13 @@ import AppButton from '../components/AppButton';
 
 function TopUpScreen({navigation, route}) {
     let params = route.params;
+    let [topUpAmount, setTopUpAmount] =  useState(0);
+    let [empKey, setEmpKey] = useState('');
+
+    const handleTopUp = () => {
+        console.log("AMOUNT", topUpAmount);
+        console.log("EMP KEY: ",  empKey);
+    }
 
     useEffect(() => {
         console.log("COMPONENT RAN");
@@ -28,16 +35,16 @@ function TopUpScreen({navigation, route}) {
                         <AppText style={styles.rangeText}>Min: 1000 cfa - Max: 100,000 cfa</AppText>
                         <View style={styles.inputBox}>
                             <AppText style={styles.currencyText}>XAF</AppText>
-                            <TextInput placeholderTextColor={colors.medium} placeholder="0.00" style={styles.textInput}/>
+                            <TextInput  value={topUpAmount} keyboardType="number-pad" onChange={(e =>  setTopUpAmount(e.target.value))} placeholderTextColor={colors.medium} placeholder="0.00" style={styles.textInput}/>
                         </View>
                     </View>
                 </View>
                 <View style={styles.bottomContainer}>
                     {/* <AppText>ENTER AMOUNT AND TOP  UP  YOUR BALANCE</AppText> */}
                     <View style={styles.input}>
-                        <TextInput style={{ height: 50, fontSize: 16, color: colors.white}}  secureTextEntry placeholderTextColor={colors.white} placeholder="Employee Key"/> 
+                        <TextInput value={empKey} onChange={(e =>  setEmpKey(e.target.value))} style={{ height: 50, fontSize: 16, color: colors.white}}  secureTextEntry placeholderTextColor={colors.white} placeholder="Employee Key"/> 
                     </View>
-                    <AppButton title="Complete"/>
+                    <AppButton onPress={handleTopUp} title="Complete"/>
                 </View>
             </View>
         </Screen>
