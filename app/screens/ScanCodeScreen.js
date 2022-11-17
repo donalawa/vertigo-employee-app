@@ -40,6 +40,7 @@ function ScanCodeScreen({ navigation  }) {
       return <Text>No access to camera</Text>;
     }
   
+    
     return (
         <Screen>
             <View style={styles.container}>
@@ -53,7 +54,7 @@ function ScanCodeScreen({ navigation  }) {
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={StyleSheet.absoluteFillObject}
                     />
-                    
+
                     </View>
                     <View style={styles.bottomContainer}>
                         <AppButton title={'Tap to Scan Again'} style={styles.button} onPress={() => setScanned(false)} />
