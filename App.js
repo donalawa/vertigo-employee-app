@@ -2,6 +2,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Provider } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 import AuthContext from './app/auth/context';
 import AppNavigator from './app/navigation/AppNavigator';
@@ -53,12 +54,15 @@ export default function App() {
     return null;
 
   return (
+    <>
     <AuthContext.Provider value={{ user, setUser}}>
     <NavigationContainer theme={navigationTheme}>
         {user ? <Provider store={store}><AppNavigator /></Provider> : <AuthNavigator />}
     </NavigationContainer>
         <StatusBar barStyle="light-content" /> 
     </AuthContext.Provider>
+    <Toast />
+    </>
   );
 }
 

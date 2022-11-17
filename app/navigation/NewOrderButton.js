@@ -7,8 +7,8 @@ import AppLargeText from '../components/AppLargeText';
 const NewOrderButton = ({ onPress }) => (
     <TouchableOpacity onPress={onPress}>
         <View style={styles.container}>
-            {/* <MaterialCommunityIcons name="plus" color={colors.white} size={40}/> */}
-            <AppLargeText style={{ fontSize: 50, textAlign: 'center', marginTop: 0, color: colors.white}}>+</AppLargeText>
+            <MaterialCommunityIcons name="scan-helper" color={colors.white} size={30}/>
+            {/* <AppLargeText style={{ fontSize: 50, textAlign: 'center', marginTop: 0, color: colors.white}}></AppLargeText> */}
         </View>
     </TouchableOpacity>
 )

@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-
+import { useSelector } from 'react-redux';
 
 import AppText from './AppText';
 import AppLargeText from './AppLargeText';
 import defaultStyles from '../config/styles';
 
 function MenuCart(props) {
+    let [cartItems, setCartItems]  = useState([]);
+
+    let state = useSelector((state) => state);
+    useEffect(() => {
+        setCartItems(state?.cart?.cartItems)
+    },[state])
+
     return (
         <View style={styles.cart}>
                 <MaterialCommunityIcons size={22} color={defaultStyles.colors.light} name="cart-outline" />
-                <AppText style={styles.cartItem}>3 Items</AppText>
+                <AppText style={styles.cartItem}>{cartItems.length} Items</AppText>
         </View>
     );
 }

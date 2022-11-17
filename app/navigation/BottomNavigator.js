@@ -24,7 +24,7 @@ const BottomNavigator = () => (
         name="NewOrder"
         component={HomenNavigator}
         options={({ navigation }) => ({
-            tabBarButton: () => <NewOrderButton onPress={() => navigation.navigate("Home")}/>,
+            tabBarButton: () => <NewOrderButton onPress={() => navigation.navigate("ScanCode")}/>,
             tabBarIcon: ({ size, color}) => <MaterialCommunityIcons name="plus" size={size} color={color}/>
         })}
         />
