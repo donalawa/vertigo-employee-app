@@ -11,15 +11,18 @@ function TopUpScreen({navigation, route}) {
     let params = route.params;
     let [topUpAmount, setTopUpAmount] =  useState(0);
     let [empKey, setEmpKey] = useState('');
+    let [usersCode,  setUsersCode] = useState();
 
     const handleTopUp = () => {
         console.log("AMOUNT", topUpAmount);
         console.log("EMP KEY: ",  empKey);
+        console.log('code: ', usersCode)
     }
 
     useEffect(() => {
         console.log("COMPONENT RAN");
         console.log(params);
+        setUsersCode(params.code);
     },[]);  
 
     return (
